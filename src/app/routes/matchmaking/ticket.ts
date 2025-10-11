@@ -11,6 +11,7 @@ export default function () {
     async (c) => {
       const ver = await getVersion(c);
       if (!ver) return c.json({ error: "Incorrect HTTP Method" });
+
       const query = await c.req.query();
       const bucketId = query.bucketId;
       const split = bucketId?.split(":");

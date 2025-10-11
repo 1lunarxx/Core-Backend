@@ -1,8 +1,11 @@
 import { Client, GatewayIntentBits, ActivityType } from "discord.js";
+import { Log } from "../utils/handling/logging";
 import registerCommand from "./cmd/register";
 import deleteCommand from "./cmd/delete";
 import fullCommand from "./cmd/fulllocker";
-import { Log } from "../utils/handling/logging";
+import banCommand from "./cmd/ban";
+import unbanCommand from "./cmd/unban";
+
 import "dotenv/config";
 
 export const client = new Client({
@@ -18,6 +21,8 @@ const commands = async () => {
       registerCommand.data.toJSON(),
       deleteCommand.data.toJSON(),
       fullCommand.data.toJSON(),
+      banCommand.data.toJSON(),
+      unbanCommand.data.toJSON(),
     ];
     await client.application?.commands.set(cmds);
   } catch (error) {
@@ -37,6 +42,12 @@ client.on("interactionCreate", async (interaction) => {
           break;
         case "fulllocker":
           await fullCommand.execute(interaction);
+          break;
+        case "unban":
+          await unbanCommand.execute(interaction);
+          break;
+        case "ban":
+          await banCommand.execute(interaction);
           break;
       }
     } catch (error) {

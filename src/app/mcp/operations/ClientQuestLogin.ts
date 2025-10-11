@@ -1,5 +1,4 @@
 import { v4 as uuid } from "uuid";
-
 import app from "../../..";
 import Profiles from "../../../db/models/Profiles";
 import { getVersion } from "../../../utils/handling/getVersion";

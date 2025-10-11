@@ -31,4 +31,4 @@ await writeFile(
 );
 
 await import("./bot/index");
-await import("./matchmaker/index");
+// await import("./matchmaker/index"); no longer used, you may use fortmatchmaker from lawin:

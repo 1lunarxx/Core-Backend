@@ -11,6 +11,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@types/cheerio": "^1.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
