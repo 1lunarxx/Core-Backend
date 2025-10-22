@@ -1,6 +1,7 @@
 import app from "../../..";
 import Profiles from "../../../db/models/Profiles";
 import { applyProfileChanges } from "../../../utils/handling/applyProfileChanges";
+import { getVersion } from "../../../utils/handling/getVersion";
 
 export default function () {
   app.post(
@@ -23,6 +24,14 @@ export default function () {
           multiUpdate: [],
           responseVersion: 1,
         });
+      }
+
+      console.log((await getVersion(c)).build.toString());
+
+      if (profileId == "athena") {
+        profile.stats.attributes.season_num = (
+          await getVersion(c)
+        ).build.toString();
       }
 
       const response = await applyProfileChanges(profile, profileId, profiles);

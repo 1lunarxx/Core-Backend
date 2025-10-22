@@ -160,7 +160,7 @@ export default function () {
   app.post("/auth/v1/oauth/token", async (c) => {
     const body = await c.req.parseBody();
     return c.json({
-      access_token: "eg1~Flair",
+      access_token: "eg1~Core",
       token_type: "bearer",
       expires_at: new Date(Date.now() + 3599 * 1000).toISOString(),
       nonce: body.nonce,
@@ -173,14 +173,14 @@ export default function () {
         "LockerService",
         "Matchmaking Service",
       ],
-      organization_id: "Flair",
+      organization_id: "Core",
       product_id: "prod-fn",
       sandbox_id: "fn",
       deployment_id: "62a9473a2dca46b29ccf17577fcf42d7",
-      organization_user_id: "Flair",
-      product_user_id: "Flair",
+      organization_user_id: "Core",
+      product_user_id: "Core",
       product_user_id_created: false,
-      id_token: "eg1~Flair",
+      id_token: "eg1~Core",
       expires_in: 3599,
     });
   });

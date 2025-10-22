@@ -13,6 +13,8 @@ const app = new Hono({ strict: false });
 
 app.use(cors());
 
+if (process.env.LOG) app.use("*", logger());
+
 app.notFound(async (c) => {
   return HandleNotFound(c);
 });
