@@ -148,11 +148,11 @@ export default function () {
           _type: "Battle Royale News",
           messages: [
             {
-              hidden: false,
-              _type: "CommonUI Simple Message Base",
-              title: "Core",
-              body: "Welcome to Core Backend! Made by Lunar, Github: https://github.com/lunarissigma/Core-Backend",
-              spotlight: true,
+              // hidden: false,
+              // _type: "CommonUI Simple Message Base",
+              // title: "Core",
+              // body: "Welcome to Core Backend! Made by Lunar, Github: https://github.com/lunarissigma/Core-Backend",
+              // spotlight: true,
             },
           ],
         },
