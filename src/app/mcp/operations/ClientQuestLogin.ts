@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid, v4 } from "uuid";
 import app from "../../..";
 import Profiles from "../../../db/models/Profiles";
 import { getVersion } from "../../../utils/handling/getVersion";
@@ -94,10 +94,6 @@ export default function () {
       for (const file of dailyFiles) {
         const filePath = path.join(repeatablesPath, file);
         const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
-        const id = uuid();
-        if (!profile.items) {
-          return c.json({ error: "Somehow cooked.." });
-        }
 
         if (
           Object.values(profile.items).some(
@@ -132,6 +128,7 @@ export default function () {
           quantity: 1,
         };
 
+        const id = v4();
         profile.items[id] = item;
 
         MultiUpdate.push({
