@@ -26,12 +26,8 @@ export default function () {
         });
       }
 
-      console.log((await getVersion(c)).build.toString());
-
       if (profileId == "athena") {
-        profile.stats.attributes.season_num = (
-          await getVersion(c)
-        ).build.toString();
+        profile.stats.attributes.season_num = (await getVersion(c)).build;
       }
 
       const response = await applyProfileChanges(profile, profileId, profiles);

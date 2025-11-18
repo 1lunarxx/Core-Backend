@@ -25,6 +25,7 @@ export const XMPPServer = Bun.serve<CoreSocket, {}>({
     },
 
     message(socket, message) {
+      console.log(message);
       createClient(socket, message);
     },
   },

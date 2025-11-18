@@ -1,6 +1,5 @@
 import type { CoreSocket } from "..";
 import type { ServerWebSocket } from "bun";
-import xmlparser from "xml-parser";
 
 export function createClient(
   socket: ServerWebSocket<CoreSocket>,
