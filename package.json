@@ -26,6 +26,7 @@
     "mongoose": "^8.15.1",
     "npm": "^11.4.2",
     "uuid": "^11.1.0",
-    "xml-parser": "^1.2.1"
+    "xml-parser": "^1.2.1",
+    "xmlbuilder": "^15.1.1"
   }
 }
