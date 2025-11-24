@@ -11,6 +11,7 @@ Features:
 - [x] Discord Bot
 - [x] Purchasing
 - [x] Matchmaking/Matchmaker
+- [x] Logging in with Epic Games
 
 To Do:
 
