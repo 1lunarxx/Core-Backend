@@ -32,6 +32,10 @@ export default function () {
           delete profile.items[body.giftBoxItemIds];
         }
 
+        if (body.giftBoxItemId) {
+          delete profile.items[body.giftBoxItemId];
+        }
+
         profile.rvn += 1;
         profile.commandRevision += 1;
         profile.updated = new Date().toISOString();
