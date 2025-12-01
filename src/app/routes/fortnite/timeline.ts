@@ -3,12 +3,11 @@ import { getVersion } from "../../../utils/handling/getVersion";
 
 export default function () {
   app.get("/fortnite/api/calendar/v1/timeline", async (c) => {
-    const today = new Date();
-    today.setHours(17, 0, 0, 0);
-    const date = today.toISOString();
+    const date = new Date();
+    date.setHours(24, 0, 0, 0);
 
+    const midnight = new Date(date.getTime() - 60000);
     const ver = await getVersion(c);
-    if (!ver) return c.json({ error: "Incorrect HTTP Method" });
 
     return c.json({
       channels: {
@@ -19,17 +18,22 @@ export default function () {
         "client-events": {
           states: [
             {
-              validFrom: "2020-01-01T00:00:00.000Z",
+              validFrom: new Date().toISOString(),
               activeEvents: [
                 {
                   eventType: `EventFlag.Season${ver.build}`,
                   activeUntil: "9999-01-01T00:00:00.000Z",
-                  activeSince: "2020-01-01T00:00:00.000Z",
+                  activeSince: new Date().toISOString(),
                 },
                 {
                   eventType: `EventFlag.LobbySeason${ver.build}`,
                   activeUntil: "9999-01-01T00:00:00.000Z",
-                  activeSince: "2020-01-01T00:00:00.000Z",
+                  activeSince: new Date().toISOString(),
+                },
+                {
+                  eventType: "EventFlag.LTE_BlackMonday",
+                  activeUntil: "9999-01-01T00:00:00.000Z",
+                  activeSince: new Date().toISOString(),
                 },
               ],
               state: {
@@ -38,16 +42,17 @@ export default function () {
                 seasonNumber: ver.build,
                 seasonTemplateId: `AthenaSeason:athenaseason${ver.build}`,
                 matchXpBonusPoints: 0,
-                seasonBegin: "2020-01-01T13:00:00Z",
+                eventPunchCardTemplateId: "",
+                seasonBegin: new Date().toISOString(),
                 seasonEnd: "9999-01-01T14:00:00Z",
                 seasonDisplayedEnd: "9999-01-01T07:30:00Z",
-                weeklyStoreEnd: date,
+                weeklyStoreEnd: midnight.toISOString(),
                 stwEventStoreEnd: "9999-01-01T00:00:00.000Z",
                 stwWeeklyStoreEnd: "9999-01-01T00:00:00.000Z",
                 sectionStoreEnds: {
-                  Featured: date,
+                  Featured: midnight.toISOString(),
                 },
-                dailyStoreEnd: date,
+                dailyStoreEnd: midnight.toISOString(),
               },
             },
           ],
