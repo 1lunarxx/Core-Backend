@@ -32,7 +32,6 @@ export default function () {
         profile.stats.attributes.mtx_affiliate = affiliateName;
         profile.stats.attributes.mtx_affiliate_set_time =
           new Date().toISOString();
-        console.log(body);
 
         profile.rvn += 1;
         profile.commandRevision += 1;
