@@ -298,28 +298,12 @@
           "metadata": {
             "RoundType": "Arena",
             "ThresholdToAdvanceDivision": 9000,
-            "divisionRank": 6
+            "divisionRank": 7
           },
           "payoutDelay": 1,
-          "requireAllTokens": [
-            "NormalArenaDiv1",
-            "NormalArenaDiv2",
-            "NormalArenaDiv3",
-            "NormalArenaDiv4",
-            "NormalArenaDiv5",
-            "NormalArenaDiv6",
-            "NormalArenaDiv7",
-            "NormalArenaDiv8"
-          ],
-          "requireAllTokensCaller": [],
-          "requireAnyTokens": [],
-          "requireAnyTokensCaller": [],
-          "requireNoneTokensCaller": [
-            "NormalArenaDiv8",
-            "NormalArenaDiv9",
-            "NormalArenaDiv10"
-          ],
-          "round": 6,
+          "requireAllTokens": ["NormalArenaDiv7"],
+          "requireNoneTokensCaller": ["NormalArenaDiv9", "NormalArenaDiv10"],
+          "round": 7,
           "scoreLocations": [
             { "scoreId": "NormalHype", "scoreMode": "persistent" }
           ],
@@ -339,25 +323,15 @@
           "metadata": {
             "RoundType": "Arena",
             "ThresholdToAdvanceDivision": 12000,
-            "divisionRank": 6
+            "divisionRank": 8
           },
           "payoutDelay": 1,
-          "requireAllTokens": [
-            "NormalArenaDiv1",
-            "NormalArenaDiv2",
-            "NormalArenaDiv3",
-            "NormalArenaDiv4",
-            "NormalArenaDiv5",
-            "NormalArenaDiv6",
-            "NormalArenaDiv7",
-            "NormalArenaDiv8",
-            "NormalArenaDiv9"
-          ],
+          "requireAllTokens": ["NormalArenaDiv8"],
           "requireAllTokensCaller": [],
           "requireAnyTokens": [],
           "requireAnyTokensCaller": [],
-          "requireNoneTokensCaller": ["NormalArenaDiv9", "NormalArenaDiv10"],
-          "round": 6,
+          "requireNoneTokensCaller": ["NormalArenaDiv10"],
+          "round": 8,
           "scoreLocations": [
             { "scoreId": "NormalHype", "scoreMode": "persistent" }
           ],
@@ -377,26 +351,15 @@
           "metadata": {
             "RoundType": "Arena",
             "ThresholdToAdvanceDivision": 20000,
-            "divisionRank": 6
+            "divisionRank": 9
           },
           "payoutDelay": 1,
-          "requireAllTokens": [
-            "NormalArenaDiv1",
-            "NormalArenaDiv2",
-            "NormalArenaDiv3",
-            "NormalArenaDiv4",
-            "NormalArenaDiv5",
-            "NormalArenaDiv6",
-            "NormalArenaDiv7",
-            "NormalArenaDiv8",
-            "NormalArenaDiv9",
-            "NormalArenaDiv10"
-          ],
+          "requireAllTokens": ["NormalArenaDiv9"],
           "requireAllTokensCaller": [],
           "requireAnyTokens": [],
           "requireAnyTokensCaller": [],
-          "requireNoneTokensCaller": ["NormalArenaDiv10"],
-          "round": 6,
+          "requireNoneTokensCaller": [],
+          "round": 9,
           "scoreLocations": [
             { "scoreId": "NormalHype", "scoreMode": "persistent" }
           ],
@@ -412,7 +375,7 @@
           "TEAM_ELIMS_STAT_INDEX",
           "MATCH_PLAYED_STAT"
         ],
-        "minimumAccountLevel": 1
+        "minimumAccountLevel": 0
       },
       "platformMappings": {},
       "platforms": ["PS4", "XboxOne", "Switch", "Android", "IOS", "Windows"],
@@ -539,6 +502,13 @@
             { "keyValue": 1, "multiplicative": true, "pointsEarned": 20 }
           ],
           "trackedStat": "TEAM_ELIMS_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 0 }
+          ],
+          "trackedStat": "MATCH_PLAYED_STAT"
         }
       ]
     },
@@ -582,6 +552,13 @@
             { "keyValue": 1, "multiplicative": true, "pointsEarned": 20 }
           ],
           "trackedStat": "TEAM_ELIMS_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 0 }
+          ],
+          "trackedStat": "MATCH_PLAYED_STAT"
         }
       ]
     },
@@ -629,7 +606,7 @@
         {
           "matchRule": "lte",
           "rewardTiers": [
-            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 0 }
           ],
           "trackedStat": "MATCH_PLAYED_STAT"
         }
@@ -679,7 +656,7 @@
         {
           "matchRule": "lte",
           "rewardTiers": [
-            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 0 }
           ],
           "trackedStat": "MATCH_PLAYED_STAT"
         }
@@ -729,7 +706,7 @@
         {
           "matchRule": "lte",
           "rewardTiers": [
-            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 0 }
           ],
           "trackedStat": "MATCH_PLAYED_STAT"
         }
@@ -779,7 +756,7 @@
         {
           "matchRule": "lte",
           "rewardTiers": [
-            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 0 }
           ],
           "trackedStat": "MATCH_PLAYED_STAT"
         }
@@ -951,6 +928,156 @@
               }
             ],
             "threshold": 10000
+          }
+        ],
+        "scoreId": "Hype",
+        "scoringType": "value"
+      },
+      "persistentScoreId": "Hype",
+      "playlistId": "Playlist_ShowdownAlt_Solo",
+      "scoringRules": [
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 25 },
+            { "keyValue": 5, "multiplicative": false, "pointsEarned": 15 },
+            { "keyValue": 15, "multiplicative": false, "pointsEarned": 10 },
+            { "keyValue": 25, "multiplicative": false, "pointsEarned": 5 }
+          ],
+          "trackedStat": "PLACEMENT_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": true, "pointsEarned": 20 }
+          ],
+          "trackedStat": "TEAM_ELIMS_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+          ],
+          "trackedStat": "MATCH_PLAYED_STAT"
+        }
+      ]
+    },
+    {
+      "eventTemplateId": "ArenaSoloTemplate8",
+      "gameId": "Fortnite",
+      "matchCap": -1,
+      "payoutTable": {
+        "ranks": [
+          {
+            "payouts": [
+              {
+                "quantity": 1,
+                "rewardMode": "rolling",
+                "rewardType": "token",
+                "value": "NormalArenaDiv8"
+              }
+            ],
+            "threshold": 9000
+          }
+        ],
+        "scoreId": "Hype",
+        "scoringType": "value"
+      },
+      "persistentScoreId": "Hype",
+      "playlistId": "Playlist_ShowdownAlt_Solo",
+      "scoringRules": [
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 25 },
+            { "keyValue": 5, "multiplicative": false, "pointsEarned": 15 },
+            { "keyValue": 15, "multiplicative": false, "pointsEarned": 10 },
+            { "keyValue": 25, "multiplicative": false, "pointsEarned": 5 }
+          ],
+          "trackedStat": "PLACEMENT_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": true, "pointsEarned": 20 }
+          ],
+          "trackedStat": "TEAM_ELIMS_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+          ],
+          "trackedStat": "MATCH_PLAYED_STAT"
+        }
+      ]
+    },
+    {
+      "eventTemplateId": "ArenaSoloTemplate9",
+      "gameId": "Fortnite",
+      "matchCap": -1,
+      "payoutTable": {
+        "ranks": [
+          {
+            "payouts": [
+              {
+                "quantity": 1,
+                "rewardMode": "rolling",
+                "rewardType": "token",
+                "value": "NormalArenaDiv9"
+              }
+            ],
+            "threshold": 12000
+          }
+        ],
+        "scoreId": "Hype",
+        "scoringType": "value"
+      },
+      "persistentScoreId": "Hype",
+      "playlistId": "Playlist_ShowdownAlt_Solo",
+      "scoringRules": [
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": 25 },
+            { "keyValue": 5, "multiplicative": false, "pointsEarned": 15 },
+            { "keyValue": 15, "multiplicative": false, "pointsEarned": 10 },
+            { "keyValue": 25, "multiplicative": false, "pointsEarned": 5 }
+          ],
+          "trackedStat": "PLACEMENT_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": true, "pointsEarned": 20 }
+          ],
+          "trackedStat": "TEAM_ELIMS_STAT_INDEX"
+        },
+        {
+          "matchRule": "lte",
+          "rewardTiers": [
+            { "keyValue": 1, "multiplicative": false, "pointsEarned": -10 }
+          ],
+          "trackedStat": "MATCH_PLAYED_STAT"
+        }
+      ]
+    },
+    {
+      "eventTemplateId": "ArenaSoloTemplate10",
+      "gameId": "Fortnite",
+      "matchCap": -1,
+      "payoutTable": {
+        "ranks": [
+          {
+            "payouts": [
+              {
+                "quantity": 1,
+                "rewardMode": "rolling",
+                "rewardType": "token",
+                "value": "NormalArenaDiv10"
+              }
+            ],
+            "threshold": 20000
           }
         ],
         "scoreId": "Hype",
