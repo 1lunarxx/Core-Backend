@@ -27,8 +27,5 @@
   "DANCE_PRICE": 500,
 
   "GLIDER": "Glider_ID_068_GarageBand",
-  "GLIDER_PRICE": 800,
-
-  "SECTION_Core": "Pickaxe_ID_389_DonutPlate1H",
-  "SECTION_Core_PRICE": 800
+  "GLIDER_PRICE": 800
 }
