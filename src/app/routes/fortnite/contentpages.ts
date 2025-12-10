@@ -6,6 +6,7 @@ export default function () {
   app.get("/content/api/pages/fortnite-game", async (c) => {
     const ver = await getVersion(c);
     if (!ver) return c.json({ error: "Incorrect HTTP Method" });
+
     const section = await createSection();
 
     const content = {
