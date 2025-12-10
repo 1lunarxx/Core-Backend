@@ -33,25 +33,20 @@ export default function () {
         const { itemIds } = body;
 
         for (const itemId of itemIds as string[]) {
-          profile.items[itemId].attributes.item_seen = true;
-          ApplyProfileChanges.push({
-            changeType: "itemAttrChanged",
-            itemId,
-            attributeName: "item_seen",
-            attributeValue: profile.items[itemId].attributes.item_seen,
-          });
+          if (profile.items[itemId]) {
+            profile.items[itemId].attributes.item_seen = true;
+            ApplyProfileChanges.push({
+              changeType: "itemAttrChanged",
+              itemId,
+              attributeName: "item_seen",
+              attributeValue: profile.items[itemId].attributes.item_seen,
+            });
+          }
         }
 
         profile.rvn += 1;
         profile.commandRevision += 1;
         profile.updated = new Date().toISOString();
-
-        ApplyProfileChanges = [
-          {
-            changeType: "fullProfileUpdate",
-            profile: profile,
-          },
-        ];
 
         await profiles.updateOne({
           $set: { [`profiles.${profileId}`]: profile },
