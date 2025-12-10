@@ -91,51 +91,53 @@ export default function () {
         });
       }
 
-      for (const file of dailyFiles) {
-        const filePath = path.join(repeatablesPath, file);
-        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
+      if (ver.build <= 10) {
+        for (const file of dailyFiles) {
+          const filePath = path.join(repeatablesPath, file);
+          const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
-        if (
-          Object.values(profile.items).some(
-            (item: any) => item.templateId === `Quest:${content.Name}`
-          )
-        ) {
-          continue;
+          if (
+            Object.values(profile.items).some(
+              (item: any) => item.templateId === `Quest:${content.Name}`
+            )
+          ) {
+            continue;
+          }
+
+          const item = {
+            templateId: `Quest:${content.Name}`,
+            attributes: {
+              creation_time: new Date().toISOString(),
+              level: -1,
+              item_seen: false,
+              playlists: [],
+              sent_new_notification: true,
+              challenge_bundle_id: "",
+              xp_reward_scalar: 1,
+              challenge_linked_quest_given: "",
+              quest_pool: "",
+              quest_state: "Active",
+              bucket: "",
+              last_state_change_time: new Date().toISOString(),
+              challenge_linked_quest_parent: "",
+              max_level_bonus: 0,
+              xp: 0,
+              quest_rarity: "uncommon",
+              favorite: false,
+              [`completion_${content.Properties.Objectives[0].BackendName}`]: 0,
+            },
+            quantity: 1,
+          };
+
+          const id = v4();
+          profile.items[id] = item;
+
+          MultiUpdate.push({
+            changeType: "itemAdded",
+            itemId: id,
+            item: item,
+          });
         }
-
-        const item = {
-          templateId: `Quest:${content.Name}`,
-          attributes: {
-            creation_time: new Date().toISOString(),
-            level: -1,
-            item_seen: false,
-            playlists: [],
-            sent_new_notification: true,
-            challenge_bundle_id: "",
-            xp_reward_scalar: 1,
-            challenge_linked_quest_given: "",
-            quest_pool: "",
-            quest_state: "Active",
-            bucket: "",
-            last_state_change_time: new Date().toISOString(),
-            challenge_linked_quest_parent: "",
-            max_level_bonus: 0,
-            xp: 0,
-            quest_rarity: "uncommon",
-            favorite: false,
-            [`completion_${content.Properties.Objectives[0].BackendName}`]: 0,
-          },
-          quantity: 1,
-        };
-
-        const id = v4();
-        profile.items[id] = item;
-
-        MultiUpdate.push({
-          changeType: "itemAdded",
-          itemId: id,
-          item: item,
-        });
       }
 
       profile.rvn += 1;
