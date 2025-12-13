@@ -20,6 +20,7 @@ export default function () {
         },
       ]);
     }
+
     return c.json([
       {
         serviceInstanceId: "fortnite",

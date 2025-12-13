@@ -10,7 +10,7 @@ export default function () {
     const user = await User.findOne({ email: body.username });
     const createId = uuidv4();
 
-    if (!user && body.grant_type !== "client_credentials") {
+    if (!user) {
       return c.json({ error: "Invalid request" }, 400);
     }
 
