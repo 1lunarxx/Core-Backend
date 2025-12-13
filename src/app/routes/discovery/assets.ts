@@ -12,9 +12,9 @@ export default function () {
             meta: {
               revision: 32,
               headRevision: 32,
-              revisedAt: "2023-04-25T19:30:52.489Z",
+              revisedAt: new Date().toISOString(),
               promotion: 26,
-              promotedAt: "2023-04-25T19:31:12.618Z",
+              promotedAt: new Date().toISOString(),
             },
             assetData: {
               AnalyticsId: "v538",
