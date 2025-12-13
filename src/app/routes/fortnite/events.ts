@@ -1,6 +1,6 @@
 import app from "../../..";
-import Tournaments from "../../../db/models/Tournaments";
-import User from "../../../db/models/User";
+import Tournaments from "../../../db/models/tournaments";
+import User from "../../../db/models/user";
 import { getVersion } from "../../../utils/handling/getVersion";
 import path from "path";
 import fs from "fs";

@@ -1,6 +1,6 @@
 import { v4 as uuid, v4 } from "uuid";
-import app from "../../..";
-import Profiles from "../../../db/models/Profiles";
+import app, { config } from "../../..";
+import Profiles from "../../../db/models/profiles";
 import { getVersion } from "../../../utils/handling/getVersion";
 import fs from "fs";
 import path from "path";
@@ -53,7 +53,7 @@ export default function () {
 
       const dailyFiles = fs.readdirSync(repeatablesPath).slice(0, 3);
 
-      if (process.env.WEEKLY == "true") {
+      if (config.get("weekly") == true) {
         const weeklys = await Bun.file(
           `src/resources/quests/weekly/Season${ver.build}/QuestBundle_S${ver.build}_Week_001.json`
         ).json();

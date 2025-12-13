@@ -1,5 +1,5 @@
 import app from "../../..";
-import Profiles from "../../../db/models/Profiles";
+import Profiles from "../../../db/models/profiles";
 import catalog from "../../../resources/storefront/catalog.json";
 import path from "path";
 import fs from "fs";

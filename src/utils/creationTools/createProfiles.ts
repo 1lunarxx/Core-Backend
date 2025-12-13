@@ -21,10 +21,6 @@ export default async function createProfiles(accountId: any) {
     parsed.createdAt = new Date().toISOString();
     parsed.updatedAt = new Date().toISOString();
 
-    if (parsed.stats.attributes.season_num) {
-      parsed.stats.attributes.season_num = Number(process.env.VERSION);
-    }
-
     const ext = path.basename(file, path.extname(file));
     profiles[ext] = parsed;
   }

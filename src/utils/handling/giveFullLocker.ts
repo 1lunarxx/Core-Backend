@@ -1,4 +1,4 @@
-import Profiles from "../../db/models/Profiles";
+import Profiles from "../../db/models/profiles";
 import path from "path";
 
 export async function giveFullLocker(accountId: any) {

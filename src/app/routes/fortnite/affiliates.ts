@@ -1,10 +1,10 @@
-import app from "../../../";
+import app, { config } from "../../../";
 
 export default function () {
   app.get("/affiliate/api/public/affiliates/slug/:slug", async (c) => {
     const { slug } = c.req.param();
 
-    const creators = process.env.CREATORS;
+    const creators = config.get("creators");
     const creatorList = creators
       ?.split(",")
       .map((c) => c.trim())

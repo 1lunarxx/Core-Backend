@@ -1,5 +1,5 @@
 import axios from "axios";
-import app from "../../..";
+import app, { config } from "../../..";
 import { getVersion } from "../../../utils/handling/getVersion";
 
 export default function () {
@@ -20,7 +20,7 @@ export default function () {
         items: {
           MANIFEST: {
             signature: "core",
-            distribution: `http://localhost:${process.env.PORT}/`,
+            distribution: `http://localhost:${config.get("port")}/`,
             path: `Builds/Fortnite/Content/CloudDir/Core.manifest`,
             additionalDistributions: [],
           },

@@ -5,10 +5,10 @@ import {
 } from "discord.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import User from "../../db/models/User";
-import Profiles from "../../db/models/Profiles";
+import User from "../../db/models/user";
+import Profiles from "../../db/models/profiles";
 import { createProfilesFromBearer } from "../../utils/creationTools/createProfiles";
-import Tournaments from "../../db/models/Tournaments";
+import Tournaments from "../../db/models/tournaments";
 import { Fortnite } from "fortnitenpm";
 
 const fortnite = new Fortnite();

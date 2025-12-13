@@ -4,7 +4,7 @@ import {
   EmbedBuilder,
   PermissionFlagsBits,
 } from "discord.js";
-import User from "../../db/models/User";
+import User from "../../db/models/user";
 
 export default {
   data: new SlashCommandBuilder()

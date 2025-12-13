@@ -3,8 +3,8 @@ import {
   SlashCommandBuilder,
   EmbedBuilder,
 } from "discord.js";
-import User from "../../db/models/User";
-import Profiles from "../../db/models/Profiles";
+import User from "../../db/models/user";
+import Profiles from "../../db/models/profiles";
 
 export default {
   data: new SlashCommandBuilder()

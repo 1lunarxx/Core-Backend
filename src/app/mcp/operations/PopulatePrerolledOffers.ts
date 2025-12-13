@@ -1,6 +1,6 @@
 import { applyProfileChanges } from "../../../utils/handling/applyProfileChanges";
 import app from "../../..";
-import Profiles from "../../../db/models/Profiles";
+import Profiles from "../../../db/models/profiles";
 
 export default function () {
   app.post(

@@ -1,7 +1,7 @@
 import app from "../../..";
 import crypto from "crypto";
 import path from "node:path";
-import User from "../../../db/models/User";
+import User from "../../../db/models/user";
 import { readFile, stat, mkdir, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 

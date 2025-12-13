@@ -1,5 +1,5 @@
 import app from "../../..";
-import User from "../../../db/models/User";
+import User from "../../../db/models/user";
 
 export let accountIds: any;
 

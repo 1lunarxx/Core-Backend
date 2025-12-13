@@ -1,3 +1,5 @@
+import { config } from "../..";
+
 export async function createSection() {
   // proper ig
   const mainSections = [
@@ -38,7 +40,9 @@ export async function createSection() {
   ];
 
   const addedSections =
-    process.env.SECTIONS?.split(",")
+    config
+      .get("sections")
+      .split(",")
       .map((s) => s.trim())
       .filter(Boolean) || [];
 

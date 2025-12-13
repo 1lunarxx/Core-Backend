@@ -1,5 +1,5 @@
 import app from "../../..";
-import Profiles from "../../../db/models/Profiles";
+import Profiles from "../../../db/models/profiles";
 import { applyProfileChanges } from "../../../utils/handling/applyProfileChanges";
 
 export default function () {

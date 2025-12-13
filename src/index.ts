@@ -3,17 +3,20 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { HandleNotFound } from "./utils/handling/errorHandler";
 import { Log } from "./utils/handling/logging";
-import { Connect } from "./db/connect";
-import LoadRoutes from "./utils/routing/loadRoutes";
-import path from "path";
 import { createCatalog } from "./utils/creationTools/createShop";
 import { writeFile } from "fs/promises";
+import { DataBase } from "./db/wrapper";
+import { Config } from "./utils/config";
+import LoadRoutes from "./utils/routing/loadRoutes";
+import path from "path";
 
 const app = new Hono({ strict: false });
 
-app.use(cors());
+export const config = new Config();
+await config.register();
 
-if (process.env.LOG) app.use("*", logger());
+app.use("*", cors());
+if (config.get("log")) app.use(logger());
 
 app.notFound(async (c) => {
   return HandleNotFound(c);
@@ -21,9 +24,11 @@ app.notFound(async (c) => {
 
 export default app;
 
-Log(`Running on port ` + process.env.PORT);
-Connect(process.env.MONGO || "mongodb://localhost:27017/core");
+export const db = new DataBase({
+  connectionString: config.get("connectionString"),
+});
 
+await db.connect();
 await LoadRoutes.loadRoutes(path.join(__dirname, "app"), app);
 
 const catalog = createCatalog();
@@ -33,5 +38,4 @@ await writeFile(
 );
 
 await import("./bot/index");
-// await import("./xmpp/index");
-// await import("./matchmaker/index"); no longer used, you may use fortmatchmaker from lawin
+Log(`Running on port ` + config.get("port"));

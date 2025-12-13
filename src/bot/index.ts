@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, ActivityType } from "discord.js";
 import { Log } from "../utils/handling/logging";
 import { createCommands } from "../utils/creationTools/createCommands";
 import "dotenv/config";
+import { config } from "..";
 
 let createdCommands = new Map();
 
@@ -52,7 +53,7 @@ client.on("ready", async () => {
   Log(`Logged in as ${client.user?.tag}`);
 });
 
-const origin = (process.env.BOT_TOKEN ?? "").trim();
+const origin = (config.get("bot_token") ?? "").trim();
 const token = origin.replace(/^Bot\s+/i, "");
 
 client.login(token);

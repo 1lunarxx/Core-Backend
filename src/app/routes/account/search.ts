@@ -1,5 +1,5 @@
 import app from "../../..";
-import User from "../../../db/models/User";
+import User from "../../../db/models/user";
 
 export default function () {
   app.get("/api/v1/search", async (c) => {

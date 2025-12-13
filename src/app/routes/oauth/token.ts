@@ -1,4 +1,4 @@
-import User from "../../../db/models/User.ts";
+import User from "../../../db/models/user.ts";
 import app from "../../../index.ts";
 import { v4 as uuidv4 } from "uuid";
 import { sign } from "hono/jwt";
