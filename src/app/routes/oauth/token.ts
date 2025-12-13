@@ -1,6 +1,6 @@
 import User from "../../../db/models/user.ts";
 import app from "../../../index.ts";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4, v4 } from "uuid";
 import { sign } from "hono/jwt";
 import { accountIds } from "../account/public.ts";
 
@@ -8,11 +8,7 @@ export default function () {
   app.post("/account/api/oauth/token", async (c) => {
     const body = await c.req.parseBody();
     const user = await User.findOne({ email: body.username });
-    const createId = uuidv4();
-
-    if (!user) {
-      return c.json({ error: "Invalid request" }, 400);
-    }
+    const createId = v4();
 
     if (!body) {
       return c.json({ error: "Invalid request" }, 400);
@@ -20,10 +16,9 @@ export default function () {
 
     if (user?.banned) return c.json({ error: "User is banned" }, 400);
 
-    const created = new Date(user?.created ?? Date.now());
     const now = new Date();
-    const expires_in = Math.round((now.getTime() - created.getTime()) / 1000);
-    const expires_at = new Date(created.getTime() + expires_in * 1000);
+    const expires_in = Math.round((now.getTime() - now.getTime()) / 1000);
+    const expires_at = new Date(now.getTime() + expires_in * 1000);
 
     let access;
 
