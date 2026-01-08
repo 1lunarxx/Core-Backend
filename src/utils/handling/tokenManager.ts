@@ -56,7 +56,7 @@ export default class TokenManager {
       expires_in: expiresIn,
     };
 
-    const jwtToken = sign(payload, process.env.JWT_SECRET as string, {
+    const jwtToken = sign(payload, "Secret", {
       expiresIn,
     });
 

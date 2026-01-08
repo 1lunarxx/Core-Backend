@@ -291,7 +291,7 @@ export default function () {
         password: user.password,
         type: "access",
       },
-      process.env.JWT_SECRET as string
+      "Secret"
     );
 
     return c.json({
