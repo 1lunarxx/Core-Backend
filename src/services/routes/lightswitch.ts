@@ -1,4 +1,4 @@
-import app, { config } from "../../..";
+import app, { config } from "../..";
 
 export default function () {
   app.get("/lightswitch/api/service/bulk/status", async (c) => {

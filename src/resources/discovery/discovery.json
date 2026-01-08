@@ -74,7 +74,7 @@
                 "descriptionTags": [],
                 "discoveryIntent": "PUBLIC",
                 "metadata": {
-                  "product_tag": "Product.Helios",
+                  "product_tag": "Product.Core",
                   "image_url": "https://cdn.projecthelix.website/image6741.png",
                   "alt_introduction": {
                     "en": "Go it alone in a battle to be the last one standing."
@@ -112,7 +112,7 @@
                 "descriptionTags": [],
                 "discoveryIntent": "PUBLIC",
                 "metadata": {
-                  "product_tag": "Product.Helios",
+                  "product_tag": "Product.Core",
                   "image_url": "https://cdn.projecthelix.website/Arena_Playlist.png",
                   "alt_introduction": {
                     "en": "Prove your skill in this competitive mode!  During each match, you'll earn points by either achieving high placements or eliminating multiple opponents.  As you gain points, you'll compete against tougher opponents with similar scores."
@@ -144,6 +144,6 @@
       "PlayHistoryType": null
     }
   ],
-  "TestCohorts": ["Helios"],
+  "TestCohorts": ["Core"],
   "ModeSets": {}
 }

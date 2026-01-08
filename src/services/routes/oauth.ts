@@ -1,154 +1,172 @@
-import { sign } from "hono/jwt";
+import { sign } from "jsonwebtoken";
 import { v4 } from "uuid";
 import jwt from "jsonwebtoken";
 import app from "../..";
 import User from "../../database/models/User";
+import TokenManager, { ETokenType } from "../../utils/handling/tokenManager";
+import Token from "../../database/models/Tokens";
 
 export default function () {
   app.post("/account/api/oauth/token", async (c) => {
     const body = await c.req.parseBody();
-    const user = await User.findOne({ email: body.username });
-    const createId = v4();
-
-    if (!body) {
-      return c.json({ error: "Invalid request" }, 400);
+    const tokenHeader = c.req.header("Authorization");
+    if (!tokenHeader) {
+      return c.json({ error: "Missing Authorization header" }, 400);
     }
 
-    if (user?.banned) return c.json({ error: "User is banned" }, 400);
+    const token = tokenHeader.split(" ");
+    let { grant_type } = body;
 
-    const now = new Date();
-    const expires_in = Math.round((now.getTime() - now.getTime()) / 1000);
-    const expires_at = new Date(now.getTime() + expires_in * 1000);
+    if (!token[1]) {
+      return c.json([], 404);
+    }
 
-    let access;
+    const decoded = Buffer.from(token[1], "base64").toString("utf8");
+    const clientId = decoded.split(":")[0];
 
-    if (body.grant_type === "client_credentials") {
-      access = await sign({ createId }, "Secret");
-      return c.json({
-        access_token: access,
-        expires_in: 28800,
-        expires_at: "9999-12-02T01:12:01.100Z",
-        token_type: "bearer",
-        client_id: createId,
-        internal_client: true,
-        client_service: "fortnite",
-      });
-    } else if (body.grant_type === "password") {
-      const { password } = body;
+    if (!clientId) {
+      return c.json([], 404);
+    }
 
-      if (
-        !user?.password ||
-        !(await Bun.password.verify(password as string, user.password))
-      )
-        return c.json({ error: "Invalid request" }, 400);
+    const device_id = c.req.header("X-Epic-Device-Id") || v4();
 
-      let access = await sign(
-        {
-          email: body.username,
-          password: body.password,
-          type: "access",
-        },
-        "Secret"
-      );
+    let user = null;
 
-      let refresh = await sign(
-        {
-          email: body.username,
-          password: body.password,
-          type: "refresh",
-        },
-        "Secret"
-      );
+    switch (grant_type) {
+      case "client_credentials":
+        let access = await sign({ jti: v4() }, "Secret");
 
-      return c.json({
-        access_token: access,
-        expires_in: 28800,
-        expires_at: "9999-12-02T01:12:01.100Z",
-        token_type: "bearer",
-        refresh_token: refresh,
-        refresh_expires: 28800,
-        refresh_expires_at: "9999-12-02T01:12:01.100Z",
-        account_id: user?.accountId,
-        client_id: createId,
-        internal_client: true,
-        client_service: "fortnite",
-        displayName: user?.username,
-        app: "fortnite",
-        in_app_id: user?.accountId,
-        device_id: createId,
-      });
-    } else if (body.grant_type === "refresh_token") {
-      let access = await sign(
-        {
-          email: body.username,
-          password: body.password,
-          type: "access",
-        },
-        "Secret"
-      );
+        return c.json({
+          access_token: `eg1~${access}`,
+          expires_in: 28800,
+          expires_at: "9999-12-02T01:12:01.100Z",
+          token_type: "bearer",
+          client_id: v4(),
+          internal_client: true,
+          client_service: "fortnite",
+        });
 
-      let refresh = await sign(
-        {
-          email: body.username,
-          password: body.password,
-          type: "refresh",
-        },
-        "Secret"
-      );
+      case "refresh_token":
+        const { refresh_token } = body;
 
-      return c.json({
-        access_token: access,
-        expires_in: expires_in,
-        expires_at: expires_at,
-        token_type: "bearer",
-        refresh_token: refresh,
-        refresh_expires: 28800,
-        refresh_expires_at: "9999-12-31T23:59:59.999Z",
-        account_id: user?.accountId,
-        client_id: createId,
-        internal_client: true,
-        client_service: "fortnite",
-        displayName: user?.username,
-        app: "fortnite",
-        in_app_id: user?.accountId,
-        device_id: createId,
-      });
-    } else if (body.grant_type === "exchange_code") {
-      let access = await sign(
-        {
-          email: body.username,
-          password: body.password,
-          type: "access",
-        },
-        "Secret"
-      );
+        if (!refresh_token)
+          return c.json(
+            { error: "Missing refresh_token in request body" },
+            400
+          );
 
-      let refresh = await sign(
-        {
-          email: body.username,
-          password: body.password,
-          type: "refresh",
-        },
-        "Secret"
-      );
+        const cleanedRefreshToken = refresh_token
+          .toString()
+          .replace("eg1~", "");
 
-      return c.json({
-        access_token: access,
-        expires_in: expires_in,
-        expires_at: expires_at,
-        token_type: "bearer",
-        refresh_token: refresh,
-        refresh_expires: 28800,
-        refresh_expires_at: "9999-12-31T23:59:59.999Z",
-        account_id: user?.accountId,
-        client_id: createId,
-        internal_client: true,
-        client_service: "fortnite",
-        displayName: user?.username,
-        app: "fortnite",
-        in_app_id: user?.accountId,
-        device_id: createId,
-      });
+        const refreshTokenDoc = await Token.findOne({
+          token: cleanedRefreshToken,
+        });
+        if (!refreshTokenDoc)
+          return c.json({ error: "Invalid Refresh Token." }, 400);
+
+        user = await User.findOne({ accountId: refreshTokenDoc.AccountId });
+        if (!user) return c.json({ error: "Invalid Refresh Token." }, 400);
+
+        await Token.deleteOne({
+          accountId: user.accountId,
+          type: "accesstoken",
+        });
+
+        await Token.deleteOne({
+          accountId: user.accountId,
+          type: "refreshtoken",
+        });
+
+        const accessToken = await TokenManager.createToken(
+          clientId,
+          grant_type as string,
+          user,
+          ETokenType.Access
+        );
+
+        const refreshToken = await TokenManager.createToken(
+          clientId,
+          grant_type as string,
+          user,
+          ETokenType.Refresh
+        );
+
+        return c.json({
+          access_token: `eg1~${accessToken}`,
+          expires_in: 28800,
+          expires_at: "9999-12-02T01:12:01.100Z",
+          token_type: "bearer",
+          account_id: user.accountId,
+          client_id: clientId,
+          internal_client: true,
+          client_service: "fortnite",
+          refresh_token: `eg1~${refreshToken}`,
+          refresh_expires: 86400,
+          refresh_expires_at: "9999-12-02T01:12:01.100Z",
+          displayName: user.username,
+          app: "fortnite",
+          in_app_id: user.accountId,
+          device_id: device_id,
+        });
+
+      case "password":
+        const { username, password } = body;
+
+        if (!password || !username)
+          return c.json(
+            { error: "Missing username or password in request body" },
+            400
+          );
+
+        user = await User.findOne({ email: username });
+        if (!user) return c.json({ error: "Invalid account credentials" }, 400);
+
+        if (user.banned) return c.json({ error: "User is banned" }, 403);
+
+        await Token.deleteOne({
+          AccountId: user.accountId,
+          Type: "accesstoken",
+        });
+
+        await Token.deleteOne({
+          AccountId: user.accountId,
+          Type: "refreshtoken",
+        });
+
+        const passwordAccessToken = await TokenManager.createToken(
+          clientId,
+          grant_type as string,
+          user,
+          ETokenType.Access
+        );
+
+        const passwordRefreshToken = await TokenManager.createToken(
+          clientId,
+          grant_type as string,
+          user,
+          ETokenType.Refresh
+        );
+
+        return c.json({
+          access_token: `eg1~${passwordAccessToken}`,
+          expires_in: 28800,
+          expires_at: "9999-12-02T01:12:01.100Z",
+          token_type: "bearer",
+          account_id: user.accountId,
+          client_id: clientId,
+          internal_client: true,
+          client_service: "fortnite",
+          refresh_token: `eg1~${passwordRefreshToken}`,
+          refresh_expires: 86400,
+          refresh_expires_at: "9999-12-02T01:12:01.100Z",
+          displayName: user.username,
+          app: "fortnite",
+          in_app_id: user.accountId,
+          device_id: device_id,
+        });
+      default:
+        return c.json({ error: "grant_type_not_implemented" }, 400);
     }
   });
 
