@@ -14,6 +14,7 @@
   "dependencies": {
     "@types/cheerio": "^1.0.0",
     "@types/jsonwebtoken": "^9.0.10",
+    "ares-library": "^1.0.5",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
     "chalk": "^5.4.1",

@@ -4,7 +4,6 @@ const shop = Bun.file("config/shop_config.json");
 const config = await shop.json();
 
 const file = await Bun.file("src/resources/storefront/catalog.json").json();
-
 const catalog = Array.isArray(file.storefronts) ? file.storefronts : [];
 
 // poop code

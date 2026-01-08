@@ -6,6 +6,7 @@
       "dependencies": {
         "@types/cheerio": "^1.0.0",
         "@types/jsonwebtoken": "^9.0.10",
+        "ares-library": "^1.0.5",
         "axios": "^1.10.0",
         "bcrypt": "^6.0.0",
         "chalk": "^5.4.1",
@@ -74,6 +75,8 @@
     "@types/xml-parser": ["@types/xml-parser@1.2.33", "", {}, "sha512-ICBLYmorgU+X9Q0hKUQe7OBlr9INYO8bEcl2ynqRf528Ct2b9EEoECPZtBB/cqHFaP6T/lDM0ckWcLvN0K/okw=="],
 
     "@vladfrangu/async_event_emitter": ["@vladfrangu/async_event_emitter@2.4.6", "", {}, "sha512-RaI5qZo6D2CVS6sTHFKg1v5Ohq/+Bo2LZ5gzUEwZ/WkHhwtGTCB/sVLw8ijOkAUxasZ+WshN/Rzj4ywsABJ5ZA=="],
+
+    "ares-library": ["ares-library@1.0.5", "", { "dependencies": { "uuid": "^10.0.0" }, "peerDependencies": { "typescript": "^5.0.0" } }, "sha512-d0Fgx5qiV3hHYN3LFySWhJacyqDr4rKYQup5fj2X0XlWssYSt521YDs/9HAiDiHXoIOOjJXSsDZMw5qbCzR3Xw=="],
 
     "asynckit": ["asynckit@0.4.0", "", {}, "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="],
 
@@ -274,6 +277,8 @@
     "@discordjs/rest/@discordjs/collection": ["@discordjs/collection@2.1.1", "", {}, "sha512-LiSusze9Tc7qF03sLCujF5iZp7K+vRNEDBZ86FT9aQAv3vxMLihUvKvpsCWiQ2DJq1tVckopKm1rxomgNUc9hg=="],
 
     "@discordjs/ws/@discordjs/collection": ["@discordjs/collection@2.1.1", "", {}, "sha512-LiSusze9Tc7qF03sLCujF5iZp7K+vRNEDBZ86FT9aQAv3vxMLihUvKvpsCWiQ2DJq1tVckopKm1rxomgNUc9hg=="],
+
+    "ares-library/uuid": ["uuid@10.0.0", "", { "bin": { "uuid": "dist/bin/uuid" } }, "sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ=="],
 
     "cheerio/undici": ["undici@7.16.0", "", {}, "sha512-QEg3HPMll0o3t2ourKwOeUAZ159Kn9mx5pnzHRQO8+Wixmh88YdZRiIwat0iNzNNXn0yoEtXJqFpyW7eM8BV7g=="],
 
