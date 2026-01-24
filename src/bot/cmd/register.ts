@@ -5,23 +5,23 @@ import {
 } from "discord.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import User from "../../db/models/user";
-import Profiles from "../../db/models/profiles";
+import User from "../../database/models/User";
+import Profiles from "../../database/models/Profiles";
 import createProfiles from "../../utils/creationTools/createProfiles";
-import Tournaments from "../../db/models/tournaments";
+import Tournaments from "../../database/models/Tournaments";
 
 export default {
   data: new SlashCommandBuilder()
     .setName("register")
     .setDescription("Create a Core account!")
     .addStringOption((opt) =>
-      opt.setName("username").setDescription("Username").setRequired(true)
+      opt.setName("username").setDescription("Username").setRequired(true),
     )
     .addStringOption((opt) =>
-      opt.setName("email").setDescription("Email").setRequired(true)
+      opt.setName("email").setDescription("Email").setRequired(true),
     )
     .addStringOption((opt) =>
-      opt.setName("password").setDescription("Password").setRequired(true)
+      opt.setName("password").setDescription("Password").setRequired(true),
     ),
 
   async execute(interaction: ChatInputCommandInteraction) {
@@ -92,11 +92,11 @@ export default {
       const embed = new EmbedBuilder()
         .setTitle("Welcome to Core!")
         .setDescription(
-          `Welcome **${username}**! Your account has been created.`
+          `Welcome **${username}**! Your account has been created.`,
         )
         .addFields(
           { name: "Email", value: email, inline: true },
-          { name: "Account ID", value: accountId, inline: true }
+          { name: "Account ID", value: accountId, inline: true },
         )
         .setColor("#00FF99")
         .setTimestamp()

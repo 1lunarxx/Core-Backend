@@ -4,14 +4,14 @@ import {
   EmbedBuilder,
   PermissionFlagsBits,
 } from "discord.js";
-import User from "../../db/models/user";
+import User from "../../database/models/User";
 
 export default {
   data: new SlashCommandBuilder()
     .setName("ban")
     .setDescription("Ban a user from core!")
     .addStringOption((opt) =>
-      opt.setName("user").setDescription("Users Discord ID").setRequired(true)
+      opt.setName("user").setDescription("Users Discord ID").setRequired(true),
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
@@ -67,7 +67,7 @@ export default {
       const embed = new EmbedBuilder()
         .setTitle("Core")
         .setDescription(
-          "We ran into an error while banning the selected user, please try again later."
+          "We ran into an error while banning the selected user, please try again later.",
         )
         .setColor("Red")
         .setTimestamp();

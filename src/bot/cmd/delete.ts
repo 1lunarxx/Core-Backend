@@ -3,8 +3,8 @@ import {
   SlashCommandBuilder,
   EmbedBuilder,
 } from "discord.js";
-import User from "../../db/models/user";
-import Profiles from "../../db/models/profiles";
+import User from "../../database/models/User";
+import Profiles from "../../database/models/Profiles";
 
 export default {
   data: new SlashCommandBuilder()
@@ -51,7 +51,7 @@ export default {
       const embed = new EmbedBuilder()
         .setTitle("Core")
         .setDescription(
-          "We ran into a error while deleting your account, please try again later."
+          "We ran into a error while deleting your account, please try again later.",
         )
         .setColor("Red")
         .setTimestamp();

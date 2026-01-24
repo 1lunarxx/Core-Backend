@@ -5,10 +5,10 @@ import {
 } from "discord.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import User from "../../db/models/user";
-import Profiles from "../../db/models/profiles";
+import User from "../../database/models/User";
+import Profiles from "../../database/models/Profiles";
 import { createProfilesFromBearer } from "../../utils/creationTools/createProfiles";
-import Tournaments from "../../db/models/tournaments";
+import Tournaments from "../../database/models/Tournaments";
 import { Fortnite } from "fortnitenpm";
 
 const fortnite = new Fortnite();
@@ -17,7 +17,7 @@ async function registerUser(
   email: string,
   username: string,
   accountId: string,
-  bearer: string
+  bearer: string,
 ) {
   const password = uuidv4().replace(/-/g, "");
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -50,7 +50,7 @@ export default {
       opt
         .setName("code")
         .setDescription("Authorization code")
-        .setRequired(false)
+        .setRequired(false),
     ),
 
   async execute(interaction: ChatInputCommandInteraction) {
@@ -63,7 +63,7 @@ export default {
       const embed = new EmbedBuilder()
         .setTitle("Login with Epic Games")
         .setDescription(
-          `Click the link below to get your authorization code.\nCopy the authorization code and run:\n\n\`/epic code:YOUR_authorizationCode\``
+          `Click the link below to get your authorization code.\nCopy the authorization code and run:\n\n\`/epic code:YOUR_authorizationCode\``,
         )
         .addFields({
           name: "Login Link",
@@ -104,7 +104,7 @@ export default {
         email,
         login.username,
         login.accountId,
-        login.bearer
+        login.bearer,
       );
 
       await Tournaments.create({
@@ -116,12 +116,12 @@ export default {
       const embed = new EmbedBuilder()
         .setTitle("Welcome to Core!")
         .setDescription(
-          `Welcome **${login.username}**! Your account has been created.`
+          `Welcome **${login.username}**! Your account has been created.`,
         )
         .addFields(
           { name: "Email", value: email, inline: true },
           { name: "Account ID", value: login.accountId, inline: true },
-          { name: "Password", value: password, inline: true }
+          { name: "Password", value: password, inline: true },
         )
         .setColor("#00FF99")
         .setTimestamp()

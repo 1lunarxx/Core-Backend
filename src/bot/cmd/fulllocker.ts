@@ -4,7 +4,7 @@ import {
   EmbedBuilder,
   PermissionFlagsBits,
 } from "discord.js";
-import User from "../../db/models/user";
+import User from "../../database/models/User";
 import { giveFullLocker } from "../../utils/handling/giveFullLocker";
 
 export default {
@@ -12,7 +12,7 @@ export default {
     .setName("fulllocker")
     .setDescription("Give a user full locker!")
     .addStringOption((opt) =>
-      opt.setName("user").setDescription("Users Discord ID").setRequired(true)
+      opt.setName("user").setDescription("Users Discord ID").setRequired(true),
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
@@ -57,7 +57,7 @@ export default {
       const embed = new EmbedBuilder()
         .setTitle("Core")
         .setDescription(
-          "We ran into an error while giving full locker, please try again later."
+          "We ran into an error while giving full locker, please try again later.",
         )
         .setColor("Red")
         .setTimestamp();
