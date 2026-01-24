@@ -34,8 +34,8 @@ await LoadRoutes.loadRoutes(path.join(__dirname, "services"), app);
 const catalog = createCatalog();
 await writeFile(
   "src/resources/storefront/catalog.json",
-  JSON.stringify(catalog, null, 2)
+  JSON.stringify(catalog, null, 2),
 );
 
-// await import("./bot/index");
+await import("./bot/index");
 Log(`Running on port ` + config.get("port"));
