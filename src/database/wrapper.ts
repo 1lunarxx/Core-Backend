@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { LogDebug, LogError } from "../utils/handling/logging";
+import { LogDebug, LogError } from "../utils/logging";
 
 interface Config {
   connectionString?: string;

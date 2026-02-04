@@ -1,8 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { HandleNotFound } from "./utils/handling/errorHandler";
-import { Log } from "./utils/handling/logging";
+import { Log } from "./utils/logging";
 import { createCatalog } from "./utils/creationTools/createShop";
 import { writeFile } from "fs/promises";
 import { DataBase } from "./database/wrapper";
@@ -19,7 +18,9 @@ app.use("*", cors());
 if (config.get("log")) app.use(logger());
 
 app.notFound(async (c) => {
-  return HandleNotFound(c);
+  return c.json({
+    error: "Route not found!",
+  });
 });
 
 export default app;

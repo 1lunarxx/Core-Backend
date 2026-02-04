@@ -1,5 +1,5 @@
 import app from "../..";
-import { getVersion } from "../../utils/handling/getVersion";
+import { getVersion } from "../../utils/getVersion";
 
 export default function () {
   app.get("/fortnite/api/calendar/v1/timeline", async (c) => {

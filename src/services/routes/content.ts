@@ -1,6 +1,6 @@
 import app from "../..";
 import { createSection } from "../../utils/creationTools/createSection";
-import { getVersion } from "../../utils/handling/getVersion";
+import { getVersion } from "../../utils/getVersion";
 
 export default function () {
   app.get("/content/api/pages/fortnite-game", async (c) => {
@@ -215,86 +215,86 @@ export default function () {
               _templateName: "FortniteGameDynamicBackgrounds",
             }
           : ver.build === 24
-          ? {
-              backgrounds: {
-                backgrounds: [
-                  {
-                    stage: `defaultnotris`,
-                    _type: "DynamicBackground",
-                    backgroundimage:
-                      "https://cdn2.unrealengine.com/t-ch4s2-bp-lobby-4096x2048-edde08d15f7e.jpg",
-                    key: "lobby",
+            ? {
+                backgrounds: {
+                  backgrounds: [
+                    {
+                      stage: `defaultnotris`,
+                      _type: "DynamicBackground",
+                      backgroundimage:
+                        "https://cdn2.unrealengine.com/t-ch4s2-bp-lobby-4096x2048-edde08d15f7e.jpg",
+                      key: "lobby",
+                    },
+                  ],
+                  _type: "DynamicBackgroundList",
+                },
+                _title: "dynamicbackgrounds",
+                _noIndex: false,
+                _activeDate: new Date().toISOString(),
+                lastModified: new Date().toISOString(),
+                _locale: "en-US",
+                _templateName: "FortniteGameDynamicBackgrounds",
+              }
+            : ver.build === 20
+              ? {
+                  backgrounds: {
+                    backgrounds: [
+                      {
+                        stage: `season20`,
+                        _type: "DynamicBackground",
+                        backgroundimage:
+                          "https://cdn2.unrealengine.com/t-bp20-40-armadillo-glowup-lobby-2048x2048-2048x2048-3b83b887cc7f.jpg",
+                        key: "lobby",
+                      },
+                    ],
+                    _type: "DynamicBackgroundList",
                   },
-                ],
-                _type: "DynamicBackgroundList",
-              },
-              _title: "dynamicbackgrounds",
-              _noIndex: false,
-              _activeDate: new Date().toISOString(),
-              lastModified: new Date().toISOString(),
-              _locale: "en-US",
-              _templateName: "FortniteGameDynamicBackgrounds",
-            }
-          : ver.build === 20
-          ? {
-              backgrounds: {
-                backgrounds: [
-                  {
-                    stage: `season20`,
-                    _type: "DynamicBackground",
-                    backgroundimage:
-                      "https://cdn2.unrealengine.com/t-bp20-40-armadillo-glowup-lobby-2048x2048-2048x2048-3b83b887cc7f.jpg",
-                    key: "lobby",
+                  _title: "dynamicbackgrounds",
+                  _noIndex: false,
+                  _activeDate: new Date().toISOString(),
+                  lastModified: new Date().toISOString(),
+                  _locale: "en-US",
+                  _templateName: "FortniteGameDynamicBackgrounds",
+                }
+              : ver.build === 23
+                ? {
+                    backgrounds: {
+                      backgrounds: [
+                        {
+                          stage: `season2300`,
+                          _type: "DynamicBackground",
+                          backgroundimage:
+                            "https://cdn2.unrealengine.com/t-bp23-lobby-2048x1024-2048x1024-26f2c1b27f63.png",
+                          key: "lobby",
+                        },
+                      ],
+                      _type: "DynamicBackgroundList",
+                    },
+                    _title: "dynamicbackgrounds",
+                    _noIndex: false,
+                    _activeDate: "2019-08-21T15:59:59.342Z",
+                    lastModified: "2019-10-29T13:07:27.936Z",
+                    _locale: "en-US",
+                    _templateName: "FortniteGameDynamicBackgrounds",
+                  }
+                : {
+                    backgrounds: {
+                      backgrounds: [
+                        {
+                          stage: `season${ver.build}`,
+                          _type: "DynamicBackground",
+                          key: "lobby",
+                        },
+                      ],
+                      _type: "DynamicBackgroundList",
+                    },
+                    _title: "dynamicbackgrounds",
+                    _noIndex: false,
+                    _activeDate: new Date().toISOString(),
+                    lastModified: new Date().toISOString(),
+                    _locale: "en-US",
+                    _templateName: "FortniteGameDynamicBackgrounds",
                   },
-                ],
-                _type: "DynamicBackgroundList",
-              },
-              _title: "dynamicbackgrounds",
-              _noIndex: false,
-              _activeDate: new Date().toISOString(),
-              lastModified: new Date().toISOString(),
-              _locale: "en-US",
-              _templateName: "FortniteGameDynamicBackgrounds",
-            }
-          : ver.build === 23
-          ? {
-              backgrounds: {
-                backgrounds: [
-                  {
-                    stage: `season2300`,
-                    _type: "DynamicBackground",
-                    backgroundimage:
-                      "https://cdn2.unrealengine.com/t-bp23-lobby-2048x1024-2048x1024-26f2c1b27f63.png",
-                    key: "lobby",
-                  },
-                ],
-                _type: "DynamicBackgroundList",
-              },
-              _title: "dynamicbackgrounds",
-              _noIndex: false,
-              _activeDate: "2019-08-21T15:59:59.342Z",
-              lastModified: "2019-10-29T13:07:27.936Z",
-              _locale: "en-US",
-              _templateName: "FortniteGameDynamicBackgrounds",
-            }
-          : {
-              backgrounds: {
-                backgrounds: [
-                  {
-                    stage: `season${ver.build}`,
-                    _type: "DynamicBackground",
-                    key: "lobby",
-                  },
-                ],
-                _type: "DynamicBackgroundList",
-              },
-              _title: "dynamicbackgrounds",
-              _noIndex: false,
-              _activeDate: new Date().toISOString(),
-              lastModified: new Date().toISOString(),
-              _locale: "en-US",
-              _templateName: "FortniteGameDynamicBackgrounds",
-            },
 
       ...section,
       _suggestedPrefetch: [],

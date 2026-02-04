@@ -5,7 +5,7 @@ import {
   PermissionFlagsBits,
 } from "discord.js";
 import User from "../../database/models/User";
-import { giveFullLocker } from "../../utils/handling/giveFullLocker";
+import Profiles from "../../database/models/Profiles";
 
 export default {
   data: new SlashCommandBuilder()
@@ -42,7 +42,33 @@ export default {
         return await interaction.reply({ embeds: [embed], ephemeral: true });
       }
 
-      await giveFullLocker(user.accountId);
+      const profile = await Profiles.findOne({ accountId: user.accountId });
+      if (!profile) {
+        const embed = new EmbedBuilder()
+          .setTitle("Core")
+          .setDescription("User is missing a profile!")
+          .setColor("Red")
+          .setTimestamp();
+
+        return await interaction.reply({ embeds: [embed], ephemeral: true });
+      }
+
+      if (!user.hasFL) {
+        let athena = profile.profiles["athena"];
+
+        const allItems = await Bun.file(
+          "src/resources/utilities/allCosmetics.json",
+        ).json();
+
+        athena.items = { ...athena.items, ...allItems };
+
+        await profile?.updateOne({
+          $set: { "profiles.athena.items": athena.items },
+        });
+
+        user.hasFL = true;
+        await user.save();
+      }
 
       const embed = new EmbedBuilder()
         .setTitle("Core")

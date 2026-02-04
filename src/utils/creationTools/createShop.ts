@@ -1,5 +1,5 @@
 import type { CatalogEntry } from "../types/catalog";
-import { Log } from "../handling/logging";
+import { Log } from "../logging";
 const shop = Bun.file("config/shop_config.json");
 const config = await shop.json();
 
@@ -24,7 +24,7 @@ function createEntry(
   id: string,
   type: itemtypes,
   price: number,
-  sectionId: "Featured" | "Daily"
+  sectionId: "Featured" | "Daily",
 ): CatalogEntry {
   const layout = sectionId === "Featured" ? "Core" : "Daily";
   const analyticId = sectionId === "Featured" ? "Core" : "DailyCore";
@@ -112,7 +112,6 @@ function* createEntries(): Generator<{
 }
 
 export function createCatalog() {
-  Log("Created Shop");
   const entries = Array.from(createEntries());
 
   const weekly = entries
@@ -134,7 +133,7 @@ export function createCatalog() {
     },
     ...catalog.filter(
       (s: any) =>
-        s.name !== "BRWeeklyStorefront" && s.name !== "BRDailyStorefront"
+        s.name !== "BRWeeklyStorefront" && s.name !== "BRDailyStorefront",
     ),
   ];
 

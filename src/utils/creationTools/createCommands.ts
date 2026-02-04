@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { LogError } from "../handling/logging";
+import { LogError } from "../logging";
 
 export async function createCommands() {
   const commands = new Map();

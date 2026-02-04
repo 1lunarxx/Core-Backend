@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, ActivityType } from "discord.js";
-import { Log } from "../utils/handling/logging";
+import { Log } from "../utils/logging";
 import { createCommands } from "../utils/creationTools/createCommands";
 import "dotenv/config";
 import { config } from "..";

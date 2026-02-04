@@ -1,16 +1,18 @@
 import app from "../..";
 import Tournaments from "../../database/models/Tournaments";
 import User from "../../database/models/User";
-import { getVersion } from "../../utils/handling/getVersion";
+import { getVersion } from "../../utils/getVersion";
 import { v4 } from "uuid";
 
 export default function () {
   app.get("/api/v1/events/Fortnite/download/:accountId", async (c) => {
     const ver = await getVersion(c);
     if (!ver) return c.json({ error: "Incorrect HTTP Method" });
+
     if (ver.build < 8) {
       return c.json({});
     }
+
     const user = await User.findOne({ accountId: c.req.param("accountId") });
     if (!user) return c.json([], 404);
 
@@ -29,7 +31,7 @@ export default function () {
 
   app.get("/api/v1/events/Fortnite/:eventId/history/:accountId", async (c) => {
     var history: any = await Bun.file(
-      "src/resources/events/history.json"
+      "src/resources/events/history.json",
     ).json();
     history[0].scoreKey.eventId = c.req.param("eventId");
     history[0].teamId = c.req.param("accountId");
@@ -46,7 +48,7 @@ export default function () {
     "/api/v1/leaderboards/Fortnite/:eventId/:eventWindowId/:accountId",
     async (c) => {
       const event: any = await Bun.file(
-        "src/resources/events/leaderboard.json"
+        "src/resources/events/leaderboard.json",
       ).json();
 
       event.eventId = c.req.param("eventId");
@@ -93,6 +95,6 @@ export default function () {
       }));
 
       return c.json(event);
-    }
+    },
   );
 }

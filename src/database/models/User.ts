@@ -8,6 +8,7 @@ interface IUser {
   banned: boolean;
   discordId: string;
   created: Date;
+  hasFL: boolean;
 }
 
 const UserSchema: Schema<IUser> = new Schema({
@@ -17,6 +18,7 @@ const UserSchema: Schema<IUser> = new Schema({
   username: { type: String, required: true, unique: true },
   banned: { type: Boolean, required: false, unique: false },
   created: { type: Date, required: false },
+  hasFL: { type: Boolean, required: false, unique: false },
   discordId: { type: String, required: false, unique: true },
 });
 

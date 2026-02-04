@@ -1,7 +1,7 @@
 import { v4 as uuid, v4 } from "uuid";
 import app, { config } from "../../..";
 import Profiles from "../../../database/models/Profiles";
-import { getVersion } from "../../../utils/handling/getVersion";
+import { getVersion } from "../../../utils/getVersion";
 import fs from "fs";
 import path from "path";
 
@@ -48,14 +48,14 @@ export default function () {
 
       const repeatablesPath = path.resolve(
         __dirname,
-        "../../../resources/quests/repeatables"
+        "../../../resources/quests/repeatables",
       );
 
       const dailyFiles = fs.readdirSync(repeatablesPath).slice(0, 3);
 
       if (config.get("weekly") == true) {
         const weeklys = await Bun.file(
-          `src/resources/quests/weekly/Season${ver.build}/QuestBundle_S${ver.build}_Week_001.json`
+          `src/resources/quests/weekly/Season${ver.build}/QuestBundle_S${ver.build}_Week_001.json`,
         ).json();
         const bundleName = `ChallengeBundle:${weeklys.Name}`;
         const objectiveStates: Record<string, number> = {};
@@ -98,7 +98,7 @@ export default function () {
 
           if (
             Object.values(profile.items).some(
-              (item: any) => item.templateId === `Quest:${content.Name}`
+              (item: any) => item.templateId === `Quest:${content.Name}`,
             )
           ) {
             continue;
@@ -160,6 +160,6 @@ export default function () {
         multiUpdate: MultiUpdate,
         responseVersion: 1,
       });
-    }
+    },
   );
 }

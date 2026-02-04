@@ -1,7 +1,7 @@
 import axios from "axios";
 import app from "../..";
 import { config } from "../..";
-import { getVersion } from "../../utils/handling/getVersion";
+import { getVersion } from "../../utils/getVersion";
 import fs from "fs";
 import path from "path";
 
@@ -36,7 +36,7 @@ export default function () {
         },
         assetId: appName,
       });
-    }
+    },
   );
 
   app.get("/hotconfigs/v2/livefn.json", async (c) => {
@@ -81,15 +81,15 @@ export default function () {
         "..",
         "static",
         "assets",
-        "Core.manifest"
-      )
+        "Core.manifest",
+      ),
     );
     return c.body(manifest);
   });
 
   app.get("/Builds/Fortnite/Content/CloudDir/*.ini", async (c: any) => {
     const ini: any = fs.readFileSync(
-      path.join(__dirname, "..", "..", "..", "static", "assets", "stuff.ini")
+      path.join(__dirname, "..", "..", "..", "static", "assets", "stuff.ini"),
     );
     return c.body(ini);
   });
@@ -101,11 +101,11 @@ export default function () {
         `https://epicgames-download1.akamaized.net${c.req.path}`,
         {
           responseType: "stream",
-        }
+        },
       );
       c.header("Content-Type", "application/octet-stream");
 
       return c.body(res.data);
-    }
+    },
   );
 }

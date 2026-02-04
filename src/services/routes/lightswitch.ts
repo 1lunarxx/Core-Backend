@@ -3,6 +3,7 @@ import app, { config } from "../..";
 export default function () {
   app.get("/lightswitch/api/service/bulk/status", async (c) => {
     const isMaintenance = config.get("maintenance");
+
     return c.json([
       {
         serviceInstanceId: "fortnite",

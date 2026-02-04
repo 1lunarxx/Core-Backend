@@ -3,7 +3,7 @@ import { v4 } from "uuid";
 import jwt from "jsonwebtoken";
 import app from "../..";
 import User from "../../database/models/User";
-import TokenManager, { ETokenType } from "../../utils/handling/tokenManager";
+import TokenManager, { ETokenType } from "../../utils/managers/TokenManager";
 import Token from "../../database/models/Tokens";
 
 export default function () {
@@ -52,7 +52,7 @@ export default function () {
         if (!refresh_token)
           return c.json(
             { error: "Missing refresh_token in request body" },
-            400
+            400,
           );
 
         const cleanedRefreshToken = refresh_token
@@ -82,14 +82,14 @@ export default function () {
           clientId,
           grant_type as string,
           user,
-          ETokenType.Access
+          ETokenType.Access,
         );
 
         const refreshToken = await TokenManager.createToken(
           clientId,
           grant_type as string,
           user,
-          ETokenType.Refresh
+          ETokenType.Refresh,
         );
 
         return c.json({
@@ -116,7 +116,7 @@ export default function () {
         if (!password || !username)
           return c.json(
             { error: "Missing username or password in request body" },
-            400
+            400,
           );
 
         user = await User.findOne({ email: username });
@@ -138,14 +138,14 @@ export default function () {
           clientId,
           grant_type as string,
           user,
-          ETokenType.Access
+          ETokenType.Access,
         );
 
         const passwordRefreshToken = await TokenManager.createToken(
           clientId,
           grant_type as string,
           user,
-          ETokenType.Refresh
+          ETokenType.Refresh,
         );
 
         return c.json({
@@ -227,7 +227,7 @@ export default function () {
         iat: 1966576779,
         jti: "589e0b0ee6d3444981eac054ac1425a2",
       },
-      v4()
+      v4(),
     );
 
     let id_token = await sign(
@@ -242,7 +242,7 @@ export default function () {
         iat: 1966576779,
         pfpid: "prod-fn",
       },
-      v4()
+      v4(),
     );
 
     return c.json({
@@ -291,7 +291,7 @@ export default function () {
         password: user.password,
         type: "access",
       },
-      "Secret"
+      "Secret",
     );
 
     return c.json({

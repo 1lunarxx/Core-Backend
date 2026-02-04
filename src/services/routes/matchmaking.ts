@@ -2,8 +2,7 @@ import { v4 } from "uuid";
 import app from "../..";
 import jwt from "jsonwebtoken";
 
-// scuffed cuz i cba
-let globalBucketId: any = null;
+let uhbucketId: any;
 
 export default function () {
   app.get(
@@ -13,7 +12,7 @@ export default function () {
       const region = bucketId?.split(":")[2];
       const playlist = bucketId?.split(":")[3];
 
-      globalBucketId = bucketId;
+      uhbucketId = bucketId;
 
       let matchmakingData = jwt.sign(
         {
@@ -22,7 +21,7 @@ export default function () {
           playlist: playlist,
           bucket: bucketId,
         },
-        "Core"
+        "Core",
       );
 
       const data = matchmakingData.split(".");
@@ -33,7 +32,7 @@ export default function () {
         payload: data[0] + "." + data[1],
         signature: data[2],
       });
-    }
+    },
   );
 
   app.get(
@@ -45,7 +44,7 @@ export default function () {
         sessionId: sessionId,
         key: "none",
       });
-    }
+    },
   );
 
   app.get("/fortnite/api/matchmaking/session/:session_id", async (c) => {
@@ -88,7 +87,7 @@ export default function () {
       usesPresence: false,
       allowJoinViaPresence: true,
       allowJoinViaPresenceFriendsOnly: false,
-      buildUniqueId: parseInt(globalBucketId.split(".")[0]),
+      buildUniqueId: parseInt(uhbucketId),
       lastUpdated: new Date().toISOString(),
       started: false,
     });

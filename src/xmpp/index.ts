@@ -1,6 +1,6 @@
 import type { ServerWebSocket } from "bun";
 import { createClient } from "./utilities/createClient";
-import { Log } from "../utils/handling/logging";
+import { Log } from "../utils/logging";
 
 export interface CoreSocket {
   bLoggedIn?: boolean;

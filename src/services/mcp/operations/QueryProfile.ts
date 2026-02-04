@@ -1,7 +1,7 @@
 import app from "../../..";
 import Profiles from "../../../database/models/Profiles";
 import { applyProfileChanges } from "ares-library";
-import { getVersion } from "../../../utils/handling/getVersion";
+import { getVersion } from "../../../utils/getVersion";
 
 export default function () {
   app.post(
@@ -33,6 +33,6 @@ export default function () {
       const response = await applyProfileChanges(profile, profileId, profiles);
 
       return c.json(response);
-    }
+    },
   );
 }
