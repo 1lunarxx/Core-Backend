@@ -17,35 +17,6 @@ export default function () {
     return c.json([]);
   });
 
-  app.post(
-    "/fortnite/api/game/v2/chat/:accountId/recommendGeneralChatRooms/:gameType/pc",
-    async (c) => {
-      return c.json({
-        globalChatRooms: [
-          {
-            roomName: "fortnite",
-            currentMembersCount: 0,
-            maxMembersCount: 9999,
-            publicFacingShardName: "",
-          },
-        ],
-        founderChatRooms: [
-          {
-            roomName: "founder",
-            currentMembersCount: 0,
-            maxMembersCount: 9999,
-            publicFacingShardName: "",
-          },
-        ],
-        bNeedsPaidAccessForGlobalChat: false,
-        bNeedsPaidAccessForFounderChat: false,
-        bIsGlobalChatDisabled: false,
-        bIsFounderChatDisabled: false,
-        bIsSubGameGlobalChatDisabled: false,
-      });
-    }
-  );
-
   app.get("/epic/friends/v1/:accountId/blocklist", async (c) => {
     return c.json([]);
   });
@@ -55,12 +26,10 @@ export default function () {
       accountId: c.req.query("accountId"),
     });
 
-    if (!user) return c.json([], 404);
-
     return c.json([
       {
-        accountId: user?.accountId,
-        displayName: user?.username,
+        accountId: user ? user?.accountId : "",
+        displayName: user ? user?.username : "",
         preferredLanguage: "en",
         cabinedMode: false,
         empty: false,
@@ -78,22 +47,18 @@ export default function () {
         "https://download4.epicgames.com/",
         "https://fastly-download.epicgames.com/",
       ],
-    })
+    }),
   );
 
   app.get(
     "/fortnite/api/receipts/v1/account/:accountid/receipts",
     async (c) => {
       return c.json({});
-    }
+    },
   );
 
   app.get("/fortnite/api/entitlementCheck", async (c) => {
     return c.json([], 200);
-  });
-
-  app.get("/waitingroom/api/waitingroom", async (c) => {
-    return c.json([]);
   });
 
   app.post("/datarouter/api/v1/public/data", async (c) => {
@@ -122,6 +87,6 @@ export default function () {
     "/fortnite/api/receipts/v1/account/:accountId/receipts",
     async (c) => {
       return c.json([]);
-    }
+    },
   );
 }

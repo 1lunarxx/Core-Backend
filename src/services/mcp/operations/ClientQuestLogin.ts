@@ -1,4 +1,4 @@
-import { v4 as uuid, v4 } from "uuid";
+import { v4 } from "uuid";
 import app, { config } from "../../..";
 import Profiles from "../../../database/models/Profiles";
 import { getVersion } from "../../../utils/getVersion";

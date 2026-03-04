@@ -46,6 +46,6 @@ export default function () {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
   );
 }

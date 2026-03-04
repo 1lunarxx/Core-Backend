@@ -1,9 +1,10 @@
 import axios from "axios";
 import app from "../..";
-import { config } from "../..";
-import { getVersion } from "../../utils/getVersion";
 import fs from "fs";
 import path from "path";
+
+import { config } from "../..";
+import { getVersion } from "../../utils/getVersion";
 
 export default function () {
   app.post("/publickey/v2/publickey", async (c) => {

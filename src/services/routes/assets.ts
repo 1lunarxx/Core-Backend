@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 import app from "../..";
 
 export default function () {
@@ -27,7 +28,7 @@ export default function () {
                   ContentPanels: [
                     {
                       NumPages: 1,
-                      AnalyticsId: "p1114",
+                      AnalyticsId: v4(),
                       PanelType: "AnalyticsList",
                       AnalyticsListName: "ByEpicNoBigBattle",
                       CuratedListOfLinkCodes: [],
@@ -63,7 +64,7 @@ export default function () {
                     },
                     {
                       NumPages: 2,
-                      AnalyticsId: "p969|88dba0c4e2af76447df43d1e31331a3d",
+                      AnalyticsId: v4(),
                       PanelType: "AnalyticsList",
                       AnalyticsListName: "EventPanel",
                       CuratedListOfLinkCodes: [],

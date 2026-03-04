@@ -35,7 +35,7 @@ export default function () {
       const response = await applyProfileChanges(profile, profileId, profiles);
 
       return c.json(response);
-    }
+    },
   );
 
   app.post(
@@ -69,6 +69,6 @@ export default function () {
       const response = await applyProfileChanges(profile, profileId, profiles);
 
       return c.json(response);
-    }
+    },
   );
 }

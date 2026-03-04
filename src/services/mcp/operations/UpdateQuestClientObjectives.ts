@@ -1,6 +1,7 @@
 import app from "../../..";
 import Profiles from "../../../database/models/Profiles";
 import { applyProfileChanges } from "ares-library";
+
 export default function () {
   app.post(
     "/fortnite/api/game/v2/profile/:accountId/client/UpdateQuestClientObjectives",
@@ -27,10 +28,10 @@ export default function () {
       const response = await applyProfileChanges(
         profile,
         profileId || "athena",
-        profiles
+        profiles,
       );
 
       return c.json(response);
-    }
+    },
   );
 }

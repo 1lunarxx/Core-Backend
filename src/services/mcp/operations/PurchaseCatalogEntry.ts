@@ -1,10 +1,7 @@
 import app from "../../..";
 import Profiles from "../../../database/models/Profiles";
 import catalog from "../../../resources/storefront/catalog.json";
-import path from "path";
-import fs from "fs";
 import { getVersion } from "../../../utils/getVersion";
-import { v4 } from "uuid";
 
 export default function () {
   app.post(

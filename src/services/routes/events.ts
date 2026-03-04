@@ -30,12 +30,35 @@ export default function () {
   });
 
   app.get("/api/v1/events/Fortnite/:eventId/history/:accountId", async (c) => {
-    var history: any = await Bun.file(
-      "src/resources/events/history.json",
-    ).json();
-    history[0].scoreKey.eventId = c.req.param("eventId");
-    history[0].teamId = c.req.param("accountId");
-    history[0].teamAccountIds.push(c.req.param("accountId"));
+    var history: any = [
+      {
+        scoreKey: {
+          gameId: "Fortnite",
+          eventId: c.req.param("eventId"),
+          eventWindowId: "corelg_cup1",
+          _scoreId: null,
+        },
+        teamId: c.req.param("accountId"),
+        teamAccountIds: [c.req.param("accountId")],
+        liveSessionId: null,
+        pointsEarned: 0,
+        score: 0,
+        rank: 1,
+        percentile: 0,
+        pointBreakdown: {
+          "TEAM_ELIMS_STAT_INDEX:1": {
+            timesAchieved: 1,
+            pointsEarned: 0,
+          },
+          "PLACEMENT_STAT_INDEX:2": {
+            timesAchieved: 1,
+            pointsEarned: 0,
+          },
+        },
+        sessionHistory: [{}],
+        unscoredSessions: [],
+      },
+    ];
 
     return c.json(history);
   });
@@ -47,17 +70,31 @@ export default function () {
   app.get(
     "/api/v1/leaderboards/Fortnite/:eventId/:eventWindowId/:accountId",
     async (c) => {
-      const event: any = await Bun.file(
-        "src/resources/events/leaderboard.json",
-      ).json();
-
-      event.eventId = c.req.param("eventId");
-      event.eventWindowId = c.req.param("eventWindowId");
-      event.updatedTime = new Date().toISOString();
-
-      event.entryTemplate.eventId = event.eventId;
-      event.entryTemplate.eventWindowId = event.eventWindowId;
-      event.entryTemplate.teamId = c.req.param("accountId");
+      const event: any = {
+        gameId: "Fortnite",
+        eventId: c.req.param("eventId"),
+        eventWindowId: c.req.param("eventWindowId"),
+        page: 0,
+        totalPages: 1,
+        updatedTime: new Date().toISOString(),
+        entryTemplate: {
+          gameId: "Fortnite",
+          eventId: c.req.param("eventId"),
+          eventWindowId: c.req.param("eventWindowId"),
+          teamAccountIds: [],
+          pointsEarned: 1,
+          score: 1.0,
+          rank: 1,
+          percentile: 0.1,
+          tokens: ["GroupIdentity_GeoIdentity_fortnite"],
+          teamId: c.req.param("accountId"),
+          liveSessionId: null,
+          pointBreakdown: {},
+          sessionHistory: [],
+        },
+        entries: [],
+        liveSessions: {},
+      };
 
       const users = await User.find({});
 

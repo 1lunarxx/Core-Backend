@@ -2,8 +2,6 @@ import { v4 } from "uuid";
 import app from "../..";
 import jwt from "jsonwebtoken";
 
-let uhbucketId: any;
-
 export default function () {
   app.get(
     "/fortnite/api/game/v2/matchmakingservice/ticket/player/:accountId",
@@ -11,8 +9,6 @@ export default function () {
       const bucketId = c.req.query("bucketId");
       const region = bucketId?.split(":")[2];
       const playlist = bucketId?.split(":")[3];
-
-      uhbucketId = bucketId;
 
       let matchmakingData = jwt.sign(
         {
@@ -87,7 +83,7 @@ export default function () {
       usesPresence: false,
       allowJoinViaPresence: true,
       allowJoinViaPresenceFriendsOnly: false,
-      buildUniqueId: parseInt(uhbucketId),
+      buildUniqueId: null,
       lastUpdated: new Date().toISOString(),
       started: false,
     });

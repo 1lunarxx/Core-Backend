@@ -16,7 +16,7 @@ export default function () {
       "..",
       "..",
       "static",
-      "hotfixes"
+      "hotfixes",
     );
 
     if (!fs.existsSync(hotfixStatic)) {
@@ -110,7 +110,7 @@ export default function () {
     const clientSettings: string = path.join(
       process.env.LOCALAPPDATA as string,
       "Core",
-      "ClientSettings"
+      "ClientSettings",
     );
 
     if (!existsSync(clientSettings)) await mkdir(clientSettings);
@@ -120,7 +120,7 @@ export default function () {
 
     const clientSettingsFile = path.join(
       clientSettings,
-      `ClientSettings-${user?.accountId}.Sav`
+      `ClientSettings-${user?.accountId}.Sav`,
     );
 
     if (file !== "ClientSettings.Sav" || !existsSync(clientSettingsFile))
@@ -139,7 +139,7 @@ export default function () {
     const clientSettings: string = path.join(
       process.env.LOCALAPPDATA as string,
       "Core",
-      "ClientSettings"
+      "ClientSettings",
     );
     if (!existsSync(clientSettings)) {
       try {
@@ -152,7 +152,7 @@ export default function () {
 
     const clientSettingsFile = path.join(
       clientSettings,
-      `ClientSettings-${user?.accountId}.Sav`
+      `ClientSettings-${user?.accountId}.Sav`,
     );
 
     if (existsSync(clientSettingsFile)) {
@@ -192,13 +192,13 @@ export default function () {
     const clientSettings: string = path.join(
       process.env.LOCALAPPDATA as string,
       "Core",
-      "ClientSettings"
+      "ClientSettings",
     );
     if (!existsSync(clientSettings)) await mkdir(clientSettings);
 
     const clientSettingsFile = path.join(
       clientSettings,
-      `ClientSettings-${c.req.param("accountId")}.Sav`
+      `ClientSettings-${c.req.param("accountId")}.Sav`,
     );
 
     await writeFile(clientSettingsFile, new Uint8Array(body), "latin1");

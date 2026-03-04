@@ -61,7 +61,7 @@ export default function () {
     "/account/api/public/account/:accountId/externalAuths",
     async (c) => {
       return c.json([]);
-    }
+    },
   );
 
   app.get("/api/v1/search", async (c) => {
