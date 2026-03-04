@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import app from "../..";
-import discovery from "../../resources/discovery/discovery.json";
+import discovery from "../../resources/discovery.json";
 
 export default function () {
   app.get("/fortnite/api/discovery/accessToken/:branch", async (c) => {

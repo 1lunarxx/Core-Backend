@@ -8,9 +8,9 @@ export default function () {
 
     const discovery = await JSON.parse(
       fs.readFileSync(
-        path.join(__dirname, "../../resources/discovery/discovery.json"),
-        "utf-8"
-      )
+        path.join(__dirname, "../../resources/discovery.json"),
+        "utf-8",
+      ),
     );
 
     for (var i in discovery.Panels[1].Pages[0].results) {
@@ -23,9 +23,9 @@ export default function () {
   app.get("/links/api/fn/mnemonic/:playlist", async (c) => {
     const discovery = await JSON.parse(
       fs.readFileSync(
-        path.join(__dirname, "../../resources/discovery/discovery.json"),
-        "utf-8"
-      )
+        path.join(__dirname, "../../resources/discovery.json"),
+        "utf-8",
+      ),
     );
 
     for (const result of discovery.Panels[1].Pages[0].results) {

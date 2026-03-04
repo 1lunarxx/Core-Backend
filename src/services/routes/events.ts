@@ -20,7 +20,7 @@ export default function () {
     if (!tournament) return c.json([], 404);
 
     const hypeName = "NormalHype";
-    const event: any = await Bun.file("src/resources/events/event.json").json();
+    const event: any = await Bun.file("src/resources/eventInfo.json").json();
 
     event.player.accountId = tournament.accountId;
     event.player.persistentScores = { [hypeName]: tournament.hype };
